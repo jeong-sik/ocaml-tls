@@ -47,7 +47,7 @@ module Raw = struct
     | (`Closed | `Error _) as e -> e
 
   let write_t t s =
-    try Flow.copy_string s t.flow
+    try Flow.write t.flow [ Cstruct.of_string s ]
     with exn ->
       (match t.state with
        | `Error _ -> ()
